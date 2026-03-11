@@ -105,15 +105,26 @@ graph TD
 
 ## 📊 평가 결과
 
-Golden Dataset 20건 기반 평가 (예시):
+Golden Dataset 20건 기반 실제 평가 결과:
 
-| 항목 | 정확도 | 비고 |
-|------|--------|------|
-| **카테고리 분류** | 90%+ | inquiry / complaint / suggestion / spam / other |
-| **우선순위 판단** | 85%+ | high / medium / low |
-| **감정 분석** | 85%+ | positive / negative / neutral / urgent |
+| 항목 | 정확도 | 정답/전체 |
+|------|--------|-----------|
+| **카테고리 분류** | 75.0% | 15/20 |
+| **우선순위 판단** | 80.0% | 16/20 |
+| **감정 분석** | 70.0% | 14/20 |
 
-> 실제 평가 결과는 `triage evaluate` 명령으로 측정할 수 있습니다.
+**주요 클래스별 F1 스코어:**
+
+| 클래스 | Precision | Recall | F1 |
+|--------|-----------|--------|-----|
+| complaint | 1.00 | 0.80 | 0.89 |
+| inquiry | 1.00 | 0.83 | 0.91 |
+| spam | 0.75 | 1.00 | 0.86 |
+| HIGH priority | 0.86 | **1.00** | 0.92 |
+
+> HIGH 우선순위 Recall 100% = 긴급 이메일을 한 건도 놓치지 않음
+>
+> 자세한 결과: [`eval/eval_results.json`](eval/eval_results.json) | 평가 실행: `triage evaluate`
 
 ---
 
@@ -286,6 +297,17 @@ LANGCHAIN_PROJECT=ai-email-triage
 - **LangGraph Studio** - 시각적 워크플로우 디버깅
 - **멀티 테넌트** - 조직별 설정 분리 (SaaS화)
 - **LangSmith 평가** - 자동화된 LLM 출력 품질 평가
+
+---
+
+## 📚 문서
+
+| 문서 | 설명 |
+|------|------|
+| [아키텍처](docs/architecture.md) | 시스템 구조, 에이전트 구성, 워크플로우 패턴, 데이터 흐름 |
+| [설계 결정](docs/design_decisions.md) | 10가지 핵심 기술 결정과 그 이유 |
+| [평가 리포트](docs/evaluation_report.md) | 클래스별 성능 분석, 개선 방향 |
+| [API Reference](docs/api_reference.md) | REST API 엔드포인트 명세 |
 
 ---
 
