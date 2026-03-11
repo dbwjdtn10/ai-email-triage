@@ -1,0 +1,122 @@
+[
+  {
+    "email_id": "email_001",
+    "expected_category": "complaint",
+    "expected_priority": "high",
+    "expected_sentiment": "urgent"
+  },
+  {
+    "email_id": "email_002",
+    "expected_category": "suggestion",
+    "expected_priority": "medium",
+    "expected_sentiment": "positive"
+  },
+  {
+    "email_id": "email_003",
+    "expected_category": "spam",
+    "expected_priority": "low",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_004",
+    "expected_category": "inquiry",
+    "expected_priority": "medium",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_005",
+    "expected_category": "complaint",
+    "expected_priority": "high",
+    "expected_sentiment": "negative"
+  },
+  {
+    "email_id": "email_006",
+    "expected_category": "inquiry",
+    "expected_priority": "medium",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_007",
+    "expected_category": "other",
+    "expected_priority": "low",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_008",
+    "expected_category": "inquiry",
+    "expected_priority": "high",
+    "expected_sentiment": "urgent"
+  },
+  {
+    "email_id": "email_009",
+    "expected_category": "other",
+    "expected_priority": "low",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_010",
+    "expected_category": "other",
+    "expected_priority": "low",
+    "expected_sentiment": "positive"
+  },
+  {
+    "email_id": "email_011",
+    "expected_category": "spam",
+    "expected_priority": "low",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_012",
+    "expected_category": "inquiry",
+    "expected_priority": "medium",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_013",
+    "expected_category": "inquiry",
+    "expected_priority": "low",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_014",
+    "expected_category": "inquiry",
+    "expected_priority": "medium",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_015",
+    "expected_category": "complaint",
+    "expected_priority": "high",
+    "expected_sentiment": "urgent"
+  },
+  {
+    "email_id": "email_016",
+    "expected_category": "spam",
+    "expected_priority": "low",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_017",
+    "expected_category": "other",
+    "expected_priority": "medium",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_018",
+    "expected_category": "complaint",
+    "expected_priority": "high",
+    "expected_sentiment": "urgent"
+  },
+  {
+    "email_id": "email_019",
+    "expected_category": "other",
+    "expected_priority": "low",
+    "expected_sentiment": "neutral"
+  },
+  {
+    "email_id": "email_020",
+    "expected_category": "complaint",
+    "expected_priority": "high",
+    "expected_sentiment": "urgent"
+  }
+]
