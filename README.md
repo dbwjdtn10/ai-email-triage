@@ -1,6 +1,6 @@
 # 📧 AI Email Triage & Auto-Response System
 
-[![CI](https://github.com/YOUR_USERNAME/ai-email-triage/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/ai-email-triage/actions)
+[![CI](https://github.com/dbwjdtn10/ai-email-triage/actions/workflows/ci.yml/badge.svg)](https://github.com/dbwjdtn10/ai-email-triage/actions)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-0.2+-green.svg)](https://langchain-ai.github.io/langgraph/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -146,7 +146,7 @@ Golden Dataset 20건 기반 평가 (예시):
 ### 설치
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-email-triage.git
+git clone https://github.com/dbwjdtn10/ai-email-triage.git
 cd ai-email-triage
 
 # 의존성 설치
