@@ -1,0 +1,221 @@
+{
+  "summary": {
+    "category": {
+      "accuracy": 75.0,
+      "correct": 15,
+      "total": 20
+    },
+    "priority": {
+      "accuracy": 80.0,
+      "correct": 16,
+      "total": 20
+    },
+    "sentiment": {
+      "accuracy": 70.0,
+      "correct": 14,
+      "total": 20
+    }
+  },
+  "details": [
+    {
+      "email_id": "email_001",
+      "predicted_category": "complaint",
+      "expected_category": "complaint",
+      "predicted_priority": "high",
+      "expected_priority": "high",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "urgent",
+      "processing_time_ms": 24993
+    },
+    {
+      "email_id": "email_002",
+      "predicted_category": "suggestion",
+      "expected_category": "suggestion",
+      "predicted_priority": "low",
+      "expected_priority": "medium",
+      "predicted_sentiment": "positive",
+      "expected_sentiment": "positive",
+      "processing_time_ms": 10383
+    },
+    {
+      "email_id": "email_003",
+      "predicted_category": "spam",
+      "expected_category": "spam",
+      "predicted_priority": "low",
+      "expected_priority": "low",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 3987
+    },
+    {
+      "email_id": "email_004",
+      "predicted_category": "inquiry",
+      "expected_category": "inquiry",
+      "predicted_priority": "medium",
+      "expected_priority": "medium",
+      "predicted_sentiment": "neutral",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 9376
+    },
+    {
+      "email_id": "email_005",
+      "predicted_category": "complaint",
+      "expected_category": "complaint",
+      "predicted_priority": "high",
+      "expected_priority": "high",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "negative",
+      "processing_time_ms": 44591
+    },
+    {
+      "email_id": "email_006",
+      "predicted_category": "inquiry",
+      "expected_category": "inquiry",
+      "predicted_priority": "medium",
+      "expected_priority": "medium",
+      "predicted_sentiment": "neutral",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 12676
+    },
+    {
+      "email_id": "email_007",
+      "predicted_category": "spam",
+      "expected_category": "other",
+      "predicted_priority": "low",
+      "expected_priority": "low",
+      "predicted_sentiment": "neutral",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 3549
+    },
+    {
+      "email_id": "email_008",
+      "predicted_category": "other",
+      "expected_category": "inquiry",
+      "predicted_priority": "high",
+      "expected_priority": "high",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "urgent",
+      "processing_time_ms": 9870
+    },
+    {
+      "email_id": "email_009",
+      "predicted_category": "other",
+      "expected_category": "other",
+      "predicted_priority": "low",
+      "expected_priority": "low",
+      "predicted_sentiment": "neutral",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 8436
+    },
+    {
+      "email_id": "email_010",
+      "predicted_category": "suggestion",
+      "expected_category": "other",
+      "predicted_priority": "low",
+      "expected_priority": "low",
+      "predicted_sentiment": "positive",
+      "expected_sentiment": "positive",
+      "processing_time_ms": 9150
+    },
+    {
+      "email_id": "email_011",
+      "predicted_category": "spam",
+      "expected_category": "spam",
+      "predicted_priority": "high",
+      "expected_priority": "low",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 3377
+    },
+    {
+      "email_id": "email_012",
+      "predicted_category": "inquiry",
+      "expected_category": "inquiry",
+      "predicted_priority": "medium",
+      "expected_priority": "medium",
+      "predicted_sentiment": "negative",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 8938
+    },
+    {
+      "email_id": "email_013",
+      "predicted_category": "inquiry",
+      "expected_category": "inquiry",
+      "predicted_priority": "low",
+      "expected_priority": "low",
+      "predicted_sentiment": "neutral",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 23856
+    },
+    {
+      "email_id": "email_014",
+      "predicted_category": "inquiry",
+      "expected_category": "inquiry",
+      "predicted_priority": "low",
+      "expected_priority": "medium",
+      "predicted_sentiment": "positive",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 8667
+    },
+    {
+      "email_id": "email_015",
+      "predicted_category": "other",
+      "expected_category": "complaint",
+      "predicted_priority": "high",
+      "expected_priority": "high",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "urgent",
+      "processing_time_ms": 19797
+    },
+    {
+      "email_id": "email_016",
+      "predicted_category": "spam",
+      "expected_category": "spam",
+      "predicted_priority": "low",
+      "expected_priority": "low",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 3475
+    },
+    {
+      "email_id": "email_017",
+      "predicted_category": "suggestion",
+      "expected_category": "other",
+      "predicted_priority": "low",
+      "expected_priority": "medium",
+      "predicted_sentiment": "neutral",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 10302
+    },
+    {
+      "email_id": "email_018",
+      "predicted_category": "complaint",
+      "expected_category": "complaint",
+      "predicted_priority": "high",
+      "expected_priority": "high",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "urgent",
+      "processing_time_ms": 35476
+    },
+    {
+      "email_id": "email_019",
+      "predicted_category": "other",
+      "expected_category": "other",
+      "predicted_priority": "low",
+      "expected_priority": "low",
+      "predicted_sentiment": "neutral",
+      "expected_sentiment": "neutral",
+      "processing_time_ms": 22131
+    },
+    {
+      "email_id": "email_020",
+      "predicted_category": "complaint",
+      "expected_category": "complaint",
+      "predicted_priority": "high",
+      "expected_priority": "high",
+      "predicted_sentiment": "urgent",
+      "expected_sentiment": "urgent",
+      "processing_time_ms": 28611
+    }
+  ]
+}
