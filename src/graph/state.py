@@ -43,5 +43,8 @@ class EmailState(TypedDict):
     final_response: Optional[str]
     human_approved: Optional[bool]
 
+    # ── 토큰 사용량 (최신 스냅샷으로 갱신) ──
+    token_usage: Optional[dict]
+
     # ── 메타 (Annotated[list, add]로 로그 누적) ──
     processing_log: Annotated[list[str], add]

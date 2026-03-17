@@ -18,8 +18,8 @@ def save_result(state: EmailState, processing_time_ms: int = 0):
             (email_id, sender, subject, body, category, category_confidence,
              priority, sentiment, sentiment_intensity, draft_response,
              final_response, review_decision, human_approved, revision_count,
-             processing_log, processing_time_ms)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+             processing_log, processing_time_ms, total_tokens, estimated_cost_usd)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 state["email_id"],
@@ -38,6 +38,8 @@ def save_result(state: EmailState, processing_time_ms: int = 0):
                 state.get("revision_count", 0),
                 json.dumps(state.get("processing_log", []), ensure_ascii=False),
                 processing_time_ms,
+                (state.get("token_usage") or {}).get("total_tokens", 0),
+                (state.get("token_usage") or {}).get("estimated_cost_usd", 0.0),
             ),
         )
         conn.commit()
@@ -102,12 +104,18 @@ def get_stats() -> dict:
             "SELECT AVG(processing_time_ms) FROM processing_records WHERE processing_time_ms > 0"
         ).fetchone()[0]
 
+        token_row = conn.execute(
+            "SELECT SUM(total_tokens), SUM(estimated_cost_usd) FROM processing_records"
+        ).fetchone()
+
         return {
             "total": total,
             "by_category": category_stats,
             "by_priority": priority_stats,
             "by_sentiment": sentiment_stats,
             "avg_processing_time_ms": round(avg_time or 0, 1),
+            "total_tokens_used": token_row[0] or 0,
+            "total_cost_usd": round(token_row[1] or 0, 6),
         }
     finally:
         conn.close()

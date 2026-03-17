@@ -1,4 +1,4 @@
-# 📧 AI Email Triage & Auto-Response System
+# AI Email Triage & Auto-Response System
 
 [![CI](https://github.com/dbwjdtn10/ai-email-triage/actions/workflows/ci.yml/badge.svg)](https://github.com/dbwjdtn10/ai-email-triage/actions)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
@@ -11,7 +11,7 @@
 
 ---
 
-## ✨ 주요 특징
+## 주요 특징
 
 | 특징 | 설명 |
 |------|------|
@@ -27,7 +27,28 @@
 
 ---
 
-## 🏗️ 시스템 아키텍처
+## Production-Ready 기능
+
+실서비스 배포를 고려한 운영 수준의 기능들:
+
+| 기능 | 구현 | 설명 |
+|------|------|------|
+| **Pydantic Settings** | `config.py` | 타입 검증 + `.env` 자동 로딩, 환경별 설정 분리 |
+| **Retry + Exponential Backoff** | `nodes.py` | tenacity 기반 LLM API 장애 자동 복구 (최대 3회, 지수 대기) |
+| **LLM 응답 캐싱** | `llm.py` | InMemoryCache로 동일 요청 재호출 방지, 비용 절감 |
+| **토큰/비용 추적** | `callbacks.py` | LangChain 콜백으로 모델별 토큰 사용량 & 비용 실시간 집계 |
+| **병렬 배치 처리** | `routes.py` | ThreadPoolExecutor로 다건 이메일 동시 처리 |
+| **Rate Limiting** | `main.py` | slowapi 기반 엔드포인트별 요청 제한 (429 응답) |
+| **API Key 인증** | `auth.py` | X-API-Key 헤더 기반 접근 제어, 개발/운영 모드 전환 |
+| **Request Tracking** | `middleware.py` | Correlation ID + 처리 시간 헤더 (X-Request-ID, X-Process-Time) |
+| **구조화된 에러 응답** | `models/api.py` | 표준화된 ErrorResponse (code, message, detail, request_id) |
+| **Prometheus 메트릭** | `metrics.py` | 처리량, 레이턴시, 토큰 사용량, 에러율 모니터링 |
+| **Deep Health Check** | `/health/detail` | DB 연결, LLM 가용성, 워크플로우 상태 점검 |
+| **모니터링 스택** | `docker-compose` | Prometheus + Grafana 통합 (메트릭 수집 + 시각화) |
+
+---
+
+## 시스템 아키텍처
 
 ```
                         ┌─────────────┐
@@ -82,7 +103,7 @@
 
 ---
 
-## 🔄 LangGraph 워크플로우
+## LangGraph 워크플로우
 
 ```mermaid
 graph TD
@@ -103,7 +124,7 @@ graph TD
 
 ---
 
-## 📊 평가 결과
+## 평가 결과
 
 Golden Dataset 20건 기반 실제 평가 결과:
 
@@ -128,24 +149,25 @@ Golden Dataset 20건 기반 실제 평가 결과:
 
 ---
 
-## 🛠️ 기술 스택
+## 기술 스택
 
 | 구분 | 기술 | 용도 |
 |------|------|------|
 | **오케스트레이션** | LangGraph | StateGraph 기반 멀티 에이전트 워크플로우 |
-| **LLM 체이닝** | LangChain | 프롬프트 관리, Structured Output, Fallback 체인 |
+| **LLM 체이닝** | LangChain | 프롬프트 관리, Structured Output, Fallback + 캐싱 |
 | **LLM** | GPT-4o-mini + Claude Haiku | Primary + Fallback |
-| **모니터링** | LangSmith | 트레이싱, 성능 모니터링 |
-| **백엔드** | FastAPI | REST API |
+| **모니터링** | LangSmith, Prometheus, Grafana | 트레이싱 + 메트릭 수집 + 시각화 |
+| **백엔드** | FastAPI | REST API + Rate Limiting + 인증 |
 | **프론트엔드** | Streamlit | 대시보드 UI |
 | **CLI** | Typer + Rich | 인터랙티브 CLI |
-| **데이터베이스** | SQLite | 처리 이력 + Checkpoint 저장 |
-| **배포** | Docker Compose | API + Dashboard 원클릭 배포 |
-| **CI/CD** | GitHub Actions | 자동 테스트 + 린트 |
+| **데이터베이스** | SQLite | 처리 이력 + Checkpoint + 토큰 비용 저장 |
+| **배포** | Docker Compose | API + Dashboard + Prometheus + Grafana |
+| **CI/CD** | GitHub Actions | 자동 테스트 + 린트 (Python 3.11, 3.12) |
+| **안정성** | tenacity, slowapi | 재시도 + 레이트 리밋 |
 
 ---
 
-## 🚀 시작하기
+## 시작하기
 
 ### 사전 요구사항
 
@@ -198,10 +220,22 @@ triage visualize
 ```bash
 uvicorn src.api.main:app --reload
 
-# 요청 예시
+# 단건 처리
 curl -X POST http://localhost:8000/api/v1/process \
   -H "Content-Type: application/json" \
   -d '{"sender": "test@email.com", "subject": "문의", "body": "가격이 궁금합니다"}'
+
+# API Key 인증 활성화 시
+curl -X POST http://localhost:8000/api/v1/process \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: your-api-key" \
+  -d '{"sender": "test@email.com", "subject": "문의", "body": "가격이 궁금합니다"}'
+
+# 상세 헬스 체크
+curl http://localhost:8000/api/v1/health/detail
+
+# Prometheus 메트릭
+curl http://localhost:8000/metrics
 ```
 
 ### 대시보드
@@ -211,17 +245,20 @@ streamlit run dashboard/app.py
 # http://localhost:8501
 ```
 
-### Docker
+### Docker (모니터링 스택 포함)
 
 ```bash
 docker-compose up
-# API: http://localhost:8000
-# Dashboard: http://localhost:8501
+
+# API:        http://localhost:8000
+# Dashboard:  http://localhost:8501
+# Prometheus: http://localhost:9090
+# Grafana:    http://localhost:3000 (admin/admin)
 ```
 
 ---
 
-## 📁 프로젝트 구조
+## 프로젝트 구조
 
 ```
 ai-email-triage/
@@ -234,45 +271,62 @@ ai-email-triage/
 │   │   └── reviewer.py          # 품질 검토 + 재작성 루프
 │   ├── graph/                   # LangGraph 워크플로우
 │   │   ├── state.py             # EmailState (공유 상태)
-│   │   ├── nodes.py             # 노드 함수
+│   │   ├── nodes.py             # 노드 함수 (retry 포함)
 │   │   ├── edges.py             # 조건부 엣지
 │   │   └── workflow.py          # StateGraph 조립
 │   ├── prompts/                 # 프롬프트 템플릿 (5개)
 │   ├── models/                  # Pydantic 스키마
+│   │   ├── email.py             # 에이전트 입출력 스키마
+│   │   ├── result.py            # 처리 결과 모델
+│   │   └── api.py               # API 요청/응답 + 에러 모델
 │   ├── db/                      # SQLite CRUD
 │   ├── api/                     # FastAPI REST API
+│   │   ├── main.py              # 앱 + Rate Limiting + 에러 핸들러
+│   │   ├── routes.py            # 엔드포인트 (병렬 배치 포함)
+│   │   ├── auth.py              # API Key 인증
+│   │   ├── middleware.py         # 요청 추적 (Correlation ID)
+│   │   └── metrics.py           # Prometheus 메트릭
 │   └── utils/                   # 설정, 로깅, LLM 팩토리
+│       ├── config.py            # Pydantic Settings
+│       ├── llm.py               # LLM + Fallback + 캐싱
+│       ├── callbacks.py         # 토큰/비용 추적 콜백
+│       └── logger.py            # 로깅 설정
 ├── cli/main.py                  # Typer CLI
 ├── dashboard/app.py             # Streamlit 대시보드
 ├── eval/                        # 평가 파이프라인
 │   ├── golden_dataset.json      # 20건 정답 데이터
 │   └── evaluate.py              # Accuracy/F1 측정
+├── monitoring/                  # 모니터링 설정
+│   ├── prometheus.yml           # Prometheus 스크래핑 설정
+│   └── grafana-datasource.yml   # Grafana 데이터소스
 ├── data/sample_emails.json      # 20건 샘플 이메일
-├── tests/                       # 유닛 테스트 (15개)
+├── tests/                       # 테스트 (29개)
 ├── .github/workflows/ci.yml     # GitHub Actions CI
 ├── Dockerfile                   # Docker 이미지
-├── docker-compose.yml           # API + Dashboard 배포
+├── docker-compose.yml           # API + Dashboard + Monitoring
 └── pyproject.toml               # 프로젝트 설정
 ```
 
 ---
 
-## 🧪 테스트
+## 테스트
 
 ```bash
-# 전체 테스트 실행
-pytest
+# 전체 테스트 실행 (29개)
+pytest -v
 
 # 커버리지 포함
 pytest --cov=src --cov-report=html
 
 # 특정 테스트
-pytest tests/test_classifier.py -v
+pytest tests/test_api.py -v      # API 통합 테스트
+pytest tests/test_classifier.py  # 분류 에이전트 테스트
+pytest tests/test_workflow.py    # 워크플로우 엣지 테스트
 ```
 
 ---
 
-## 📈 LangSmith 트레이싱
+## LangSmith 트레이싱
 
 `.env`에 LangSmith 키를 설정하면 자동으로 모든 에이전트 호출이 트레이싱됩니다:
 
@@ -289,7 +343,7 @@ LANGCHAIN_PROJECT=ai-email-triage
 
 ---
 
-## 🔮 확장 가능성
+## 확장 가능성
 
 - **Gmail API 연동** - 실제 이메일 수신/발송 자동화
 - **Slack/Teams 알림** - HIGH 건 발생 시 실시간 알림
@@ -300,7 +354,7 @@ LANGCHAIN_PROJECT=ai-email-triage
 
 ---
 
-## 📚 문서
+## 문서
 
 | 문서 | 설명 |
 |------|------|
@@ -311,6 +365,6 @@ LANGCHAIN_PROJECT=ai-email-triage
 
 ---
 
-## 📄 License
+## License
 
 MIT License

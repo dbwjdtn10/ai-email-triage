@@ -34,6 +34,8 @@ def init_db():
             revision_count INTEGER DEFAULT 0,
             processing_log TEXT,
             processing_time_ms INTEGER,
+            total_tokens INTEGER DEFAULT 0,
+            estimated_cost_usd REAL DEFAULT 0.0,
             created_at TEXT NOT NULL DEFAULT (datetime('now'))
         )
     """)
