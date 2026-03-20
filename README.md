@@ -386,7 +386,6 @@ LANGCHAIN_PROJECT=ai-email-triage
 | [설계 결정](docs/design_decisions.md) | 10가지 핵심 기술 결정과 그 이유 |
 | [평가 리포트](docs/evaluation_report.md) | 클래스별 성능 분석, 개선 방향 |
 | [API Reference](docs/api_reference.md) | REST API 엔드포인트 명세 |
-| [면접 가이드](docs/interview_guide.md) | 포트폴리오 발표 및 면접 준비 자료 |
 
 ---
 
