@@ -48,6 +48,30 @@
 
 ---
 
+## 개발자 경험 (DX)
+
+| 도구 | 설명 |
+|------|------|
+| **Makefile** | `make test`, `make lint`, `make run` 등 자주 쓰는 명령어 원커맨드 실행 |
+| **Pre-commit Hooks** | ruff 린트 + 포맷팅 자동 검사 (커밋 시 자동 실행) |
+| **Ruff** | 초고속 Python 린터 + 포매터 (flake8, black, isort 통합) |
+| **CI/CD** | GitHub Actions로 Python 3.11/3.12 테스트 + 린트 자동화 |
+
+```bash
+# 주요 Makefile 명령어
+make dev          # 개발 의존성 설치 + pre-commit 설정
+make test         # 전체 테스트 실행
+make test-cov     # 커버리지 포함 테스트
+make lint         # 린트 검사
+make lint-fix     # 린트 자동 수정
+make run          # API 서버 실행
+make dashboard    # Streamlit 대시보드 실행
+make docker       # Docker Compose 실행
+make evaluate     # 평가 파이프라인 실행
+```
+
+---
+
 ## 시스템 아키텍처
 
 ```
@@ -362,6 +386,7 @@ LANGCHAIN_PROJECT=ai-email-triage
 | [설계 결정](docs/design_decisions.md) | 10가지 핵심 기술 결정과 그 이유 |
 | [평가 리포트](docs/evaluation_report.md) | 클래스별 성능 분석, 개선 방향 |
 | [API Reference](docs/api_reference.md) | REST API 엔드포인트 명세 |
+| [면접 가이드](docs/interview_guide.md) | 포트폴리오 발표 및 면접 준비 자료 |
 
 ---
 
